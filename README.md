@@ -1,4 +1,4 @@
-# 🛍️ @ltatarev/react-native-shopify
+# 🛍️ React Native Shopify
 
 [![npm version](https://img.shields.io/npm/v/react-native-shopify)](https://www.npmjs.com/package/shopify)
 
