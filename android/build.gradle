@@ -1,38 +1,32 @@
-apply plugin: 'com.android.library'
+def DEFAULT_COMPILE_SDK_VERSION             = 28
+def DEFAULT_BUILD_TOOLS_VERSION             = "28.0.3"
+def DEFAULT_TARGET_SDK_VERSION              = 28
+def DEFAULT_MIN_SDK_VERSION                 = 21
 
-def safeExtGet(prop, fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
+apply plugin: "com.android.library"
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 23)
-    buildToolsVersion safeExtGet('buildToolsVersion', "23.0.1")
+    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : DEFAULT_COMPILE_SDK_VERSION
+    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion safeExtGet('targetSdkVersion', 22)
+        minSdkVersion rootProject.hasProperty('minSdkVersion') ? rootProject.minSdkVersion : DEFAULT_MIN_SDK_VERSION
+        targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
-    lintOptions {
-       warning 'InvalidPackage'
+
+    compileOptions {
+       sourceCompatibility 1.8
+       targetCompatibility 1.8
     }
 }
 
-def googlePlayServicesVersion = safeExtGet('googlePlayServicesVersion', "12.0.0")
-def supportLibVersion = safeExtGet('supportLibVersion', "27.1.1")
-
 dependencies {
-    compile 'com.facebook.react:react-native:0.20.+'
+  compileOnly 'com.facebook.react:react-native:+'
 
-    implementation('com.shopify.mobilebuysdk:buy:2.1.0') {
-        exclude group: 'com.google.android.gms', module: 'play-services-wallet'
-        exclude group: 'com.android.support', module: 'support-v4'
-    }
-
-    compile "com.google.android.gms:play-services-wallet:${googlePlayServicesVersion}"
-    compile "com.android.support:support-v4:${supportLibVersion}"
+  implementation 'com.google.code.gson:gson:2.8.4'
+  implementation('com.shopify.mobilebuysdk:buy3:14.0.0') {
+    exclude group: "com.shopify.graphql.support"
+  }
 }
