@@ -106,6 +106,9 @@ Fetches products filtered with query. If query isn't defined, fetches first 250 
 
 Creates a Shopify customer with given info. If successful, customer can login into your Shopify store.
 
+<details>
+<summary>Arguments</summary>
+
 | `customerInfo` prop | type      | required | default value |
 | ------------------- | --------- | -------- | ------------- |
 | `email`             | `string`  | ✅       |               |
@@ -114,14 +117,21 @@ Creates a Shopify customer with given info. If successful, customer can login in
 | `lastName`          | `string`  |          | `''`          |
 | `acceptsMarketing`  | `boolean` |          | false         |
 
+</details>
+
 #### `getOrderByName(orderName, lineItemsCursor)`
 
 #### `getOrderHistory(pageSize, cursor)`
+
+<details>
+<summary>Arguments</summary>
 
 | props      | type     | required | default value |
 | ---------- | -------- | -------- | ------------- |
 | `pageSize` | `number` |          | 25            |
 | `cursor`   | `string` |          | `null`        |
+
+</details>
 
 #### `login(userInfo)`
 
